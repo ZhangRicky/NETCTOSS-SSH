@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.tarena.entity.Admin" table="ADMIN_INFO">
+		<id name="id" type="integer">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">ADMIN_SEQ</param>
+			</generator>
+		</id>
+		<property name="adminCode" type="string">
+			<column name="ADMIN_CODE" length="30" />
+		</property>
+		<property name="password" type="string">
+			<column name="PASSWORD" length="30" />
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="30" />
+		</property>
+		<property name="telephone" type="string">
+			<column name="TELEPHONE" length="30" />
+		</property>
+		<property name="email" type="string">
+			<column name="EMAIL" length="50" />
+		</property>
+		<property name="enrollDate" type="timestamp">
+			<column name="ENROLLDATE" />
+		</property>
+		
+		<!-- 多对多映射 -->
+		<set name="roles" table="ADMIN_ROLE" order-by="ROLE_ID">
+			<key column="ADMIN_ID"></key>
+			<many-to-many 
+				class="com.tarena.entity.Role" column="ROLE_ID"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

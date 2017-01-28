@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privileges>
+	<privilege id="1">
+		<name>角色管理</name>
+		<urls>
+			<url>/findRole</url>
+			<url>/toAddRole</url>
+			<url>/addRole</url>
+			<url>/toUpdateRole</url>
+			<url>/updateRole</url>
+			<url>/deleteRole</url>
+		</urls>
+	</privilege>
+	<privilege id="2">
+		<name>管理员</name>
+		<urls>
+			<url>/findAdmin</url>
+			<url>/toAddAdmin</url>
+			<url>/addAdmin</url>
+			<url>/toUpdateAdmin</url>
+			<url>/updateAdmin</url>
+			<url>/deleteAdmin</url>
+			<url>/resetPassword</url>
+			<url>/validateCode</url>
+		</urls>
+	</privilege>
+	<privilege id="3">
+		<name>资费管理</name>
+		<urls>
+			<url>/findCost</url>
+			<url>/deleteCost</url>
+			<url>/toAddCost</url>
+			<url>/addCost</url>
+			<url>/costNameValidate</url>
+			<url>/toUpdateCost</url>
+			<url>/updateCost</url>
+			<url>/startCost</url>
+		</urls>
+	</privilege>
+	<privilege id="4">
+		<name>账务账号</name>
+		<urls>
+			<url>/findAccount</url>
+			<url>/toAddAccount</url>
+			<url>/addAccount</url>
+			<url>/toUpdateAccount</url>
+			<url>/updateAccount</url>
+			<url>/startAccount</url>
+			<url>/pauseAccount</url>
+			<url>/deleteAccount</url>
+			<url>/viewAccount</url>
+			<url>/searchRecommender</url>
+		</urls>
+	</privilege>
+	<privilege id="5">
+		<name>业务账号</name>
+		<urls>
+			<url>/findService</url>
+			<url>/toAddService</url>
+			<url>/addService</url>
+			<url>/toUpdateService</url>
+			<url>/updateService</url>
+			<url>/startService</url>
+			<url>/pauseService</url>
+			<url>/deleteService</url>
+			<url>/searchAccount</url>
+		</urls>
+	</privilege>
+	<privilege id="6">
+		<name>账单</name>
+		<urls>
+			<url>/billList</url>
+			<url>/billItemList</url>
+			<url>/billServiceDetail</url>
+		</urls>
+	</privilege>
+	<privilege id="7">
+		<name>报表</name>
+		<urls>
+			<url>/report</url>
+		</urls>
+	</privilege>
+</privileges>

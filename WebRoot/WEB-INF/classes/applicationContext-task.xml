@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+
+	<!-- 定义quartz元素 -->
+	<!-- 将createBillTask包装成quartz里的task -->
+	<bean id="billTask" 
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 执行的类名 -->
+		<property name="targetObject" ref="createBillTask"/>
+		<!-- 执行的方法 -->
+		<property name="targetMethod" value="calculate"/>
+	</bean>
+	
+	<!-- 为billTask定义触发时机 -->
+	<bean id="billTrigger" 
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 指定task任务 -->
+		<property name="jobDetail">
+			<ref bean="billTask"/>
+		</property>
+		<!-- 指定task任务的触发时机 -->
+		<property name="cronExpression" value="0/10 * * * * ?"/>
+	</bean>
+	
+	<!-- 将billTrigger交给quartz调度工厂调度 -->
+	<bean id="triggerFactory" 
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="billTrigger"/>
+			</list>
+		</property>
+	</bean>	
+
+</beans>

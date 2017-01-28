@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<package name="service" namespace="/service" extends="netctoss">
+		<action name="findService" class="findServiceAction">
+			<param name="pageSize">5</param>
+			<result name="success">/WEB-INF/service/findService.jsp</result>
+		</action>
+		<action name="toAddService" class="toAddServiceAction">
+			<result name="success">/WEB-INF/service/addService.jsp</result>
+		</action>
+		<action name="searchAccount" class="searchAccountAction">
+			<result name="success" type="json">
+				<param name="root">account</param>
+			</result>
+		</action>
+		<action name="addService" class="addServiceAction">
+			<result name="success" type="redirectAction">
+				findService
+			</result>
+		</action>
+		<action name="toUpdateService" class="toUpdateServiceAction">
+			<result name="success">
+				/WEB-INF/service/updateService.jsp
+			</result>
+		</action>
+		<action name="updateService" class="updateServiceAction">
+			<result name="success" type="redirectAction">
+				findService
+			</result>
+		</action>
+	</package>
+
+</struts>

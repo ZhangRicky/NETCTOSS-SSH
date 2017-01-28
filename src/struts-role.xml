@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 角色管理模块 -->
+	<package name="role" namespace="/role" extends="netctoss">
+		<!-- 查询全部的Action -->
+		<action name="findRole" class="findRoleAction">
+			<param name="pageSize">3</param>
+			<result name="success">/WEB-INF/role/findRole.jsp</result>
+		</action>
+		<!-- 跳转到新增页面的Action -->
+		<action name="toAddRole" class="toAddRoleAction">
+			<result name="success">/WEB-INF/role/addRole.jsp</result>
+		</action>
+		<!-- 新增Action -->
+		<action name="addRole" class="addRoleAction">
+			<result name="success" type="redirectAction">
+				findRole
+			</result>
+		</action>
+		<!-- 跳转到修改的Action -->
+		<action name="toUpdateRole" class="toUpdateRoleAction">
+			<result name="success">/WEB-INF/role/updateRole.jsp</result>
+		</action>
+		<!-- 修改的Action -->
+		<action name="updateRole" class="updateRoleAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">toUpdateRole</param>
+				<param name="id">${role.id}</param>
+			</result>
+		</action>
+		<!-- 删除角色 -->
+		<action name="deleteRole" class="deleteRoleAction">
+			<result name="success" type="redirectAction">
+				findRole
+			</result>
+		</action>
+	</package>
+
+</struts>

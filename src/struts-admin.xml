@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 管理员管理模块 -->
+	<package name="admin" namespace="/admin" extends="netctoss">
+		<!-- 查询全部的Action -->
+		<action name="findAdmin" class="findAdminAction">
+			<param name="pageSize">3</param>
+			<result name="success">/WEB-INF/admin/findAdmin.jsp</result>
+		</action>
+		<!-- 跳转到新增页面的Action -->
+		<action name="toAddAdmin" class="toAddAdminAction">
+			<result name="success">/WEB-INF/admin/addAdmin.jsp</result>
+		</action>
+		<!-- 新增Action -->
+		<action name="addAdmin" class="addAdminAction">
+			<result name="success" type="redirectAction">
+				findAdmin
+			</result>
+		</action>
+		<!-- 跳转到修改的Action -->
+		<action name="toUpdateAdmin" class="toUpdateAdminAction">
+			<result name="success">/WEB-INF/admin/updateAdmin.jsp</result>
+		</action>
+		<!-- 修改的Action -->
+		<action name="updateAdmin" class="updateAdminAction">
+			<result name="success" type="redirectAction">
+				findAdmin
+			</result>
+		</action>
+		<!-- 重置密码的Action -->
+		<action name="resetPassword"
+			class="resetPasswordAction">
+			<result name="success" type="json">
+				<param name="root">pass</param>
+			</result>
+		</action>
+		<!-- 验证账号Action -->
+		<action name="validateCode"
+			class="adminValidateAction">
+			<result name="success" type="json">
+				<param name="root">info</param>
+			</result>
+		</action>
+		<!-- 删除的Action -->
+		<action name="deleteAdmin" class="deleteAdminAction">
+			<result name="success" type="redirectAction">
+				findAdmin
+			</result>
+		</action>
+	</package>
+
+</struts>

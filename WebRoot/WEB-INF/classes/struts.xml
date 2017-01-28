@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 引入公共配置 -->
+	<include file="struts-main.xml"/>
+	<!-- 引入资费模块 -->
+	<include file="struts-cost.xml"/>
+	<!-- 引入登录模块 -->
+	<include file="struts-login.xml"/>
+	<!-- 引入账务账号模块 -->
+	<include file="struts-account.xml"/>
+	<!-- 引入业务账号模块 -->
+	<include file="struts-service.xml"/>
+	<!-- 引入角色管理模块 -->
+	<include file="struts-role.xml"/>
+	<!-- 引入管理员管理模块 -->
+	<include file="struts-admin.xml"/>
+	<!-- 引入账单模块 -->
+	<include file="struts-bill.xml"/>
+	<!-- 引入报表模块 -->
+	<include file="struts-report.xml"/>
+
+</struts>

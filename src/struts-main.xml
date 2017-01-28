@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 开启调试模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+
+	<!-- 公共的包，封装了通用的拦截器、通用的result -->
+	<package name="netctoss" extends="json-default">
+	
+		<interceptors>
+			<!-- 登录检查拦截器 -->
+			<interceptor name="loginInterceptor"
+				class="com.tarena.interceptor.LoginInterceptor"></interceptor>
+			<!-- 权限检查拦截器 -->
+			<interceptor name="privilegeInterceptor"
+				class="com.tarena.interceptor.PrivilegeInterceptor"></interceptor>
+			<!-- 登录检查拦截器栈 -->
+			<interceptor-stack name="loginInterceptorStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			<!-- 权限检查拦截器栈 -->
+			<interceptor-stack name="privilegeInterceptorStack">
+				<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			<!-- 
+				使用token拦截器避免表单重复提交 
+				token拦截器使用方式：
+				1.Action引用token拦截器
+				2.表单中追加token标签<s:token/>
+			-->
+			<interceptor-stack name="tokenStack">
+				<interceptor-ref name="token"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="loginInterceptorStack"/>
+		<default-action-ref name="defaultPage"/>
+		<!-- <default-class-ref class="com.tarena.action.BaseAction" /> -->
+		
+		<global-results>
+			<!-- 跳转到登录页面的result -->
+			<result name="login" type="redirectAction">
+				<param name="namespace">/login</param>
+				<param name="actionName">toLogin</param>
+			</result>
+			<!-- 统一的错误页面 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+			<!-- 表单上使用token拦截器，重复提交时会报错，指向该Result -->
+			<result name="invalid.token">
+				/WEB-INF/main/error.jsp
+			</result>
+			<!-- 没有权限 -->
+			<result name="nopower" type="redirectAction">
+				<param name="namespace">/login</param>
+				<param name="actionName">nopower</param>
+			</result>
+		</global-results>
+		
+		<!-- 如果输入URL有误，则访问默认的Action -->
+		<action name="defaultPage">
+			<result name="success">/WEB-INF/main/login.jsp</result>
+		</action>
+		
+	</package>
+
+</struts>

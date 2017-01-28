@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.tarena.entity.RolePrivilege" table="ROLE_PRIVILEGE">
+		<composite-id name="id" class="com.tarena.entity.RolePrivilegeId">
+			<key-property name="roleId" type="integer" column="role_id" />
+			<key-property name="privilegeId" type="integer" column="privilege_id" />
+		</composite-id>
+	</class>
+</hibernate-mapping>

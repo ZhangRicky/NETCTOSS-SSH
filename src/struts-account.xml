@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 账务账号模块 -->
+	<package name="account" namespace="/account" extends="netctoss">
+		<!-- 查询Action -->
+		<action name="findAccount" class="findAccountAction">
+			<param name="pageSize">5</param>
+			<result name="success">/WEB-INF/account/findAccount.jsp</result>
+		</action>
+		<!-- 开通Action -->
+		<action name="startAccount" class="startAccountAction">
+			<result name="success" type="json">
+				<param name="root">success</param>
+			</result>
+		</action>
+		<!-- 暂停Action -->
+		<action name="pauseAccount" class="pauseAccountAction">
+			<result name="success" type="json">
+				<param name="root">success</param>
+			</result>
+		</action>
+		<!-- 删除Action -->
+		<action name="deleteAccount" class="deleteAccountAction">
+			<result name="success" type="json">
+				<param name="root">success</param>
+			</result>
+		</action>
+		<!-- 跳转到新增页面的Action -->
+		<action name="toAddAccount">
+			<result name="success">
+				/WEB-INF/account/addAccount.jsp
+			</result>
+		</action>
+		<!-- 新增Action -->
+		<action name="addAccount" class="addAccountAction">
+			<result name="success" type="json">
+				<param name="root">pass</param>
+			</result>
+		</action>
+		<!-- 查询推荐人Action -->
+		<action name="searchRecommender" class="validateAction"
+			method="searchRecommender">
+			<result name="success" type="json">
+				<param name="root">account</param>
+			</result>
+		</action>
+		<!-- 跳转到修改页面的Action -->
+		<action name="toUpdateAccount" class="toUpdateAccountAction">
+			<result name="success">
+				/WEB-INF/account/updateAccount.jsp
+			</result>
+		</action>
+		<!-- 修改Action -->
+		<action name="updateAccount" class="updateAccountAction">
+			<!-- 使用token拦截器避免表单重复提交 -->
+			<interceptor-ref name="tokenStack"></interceptor-ref>
+			<result name="success" type="redirectAction">
+				findAccount
+			</result>
+		</action>
+		<!-- 查看明细的Action -->
+		<!-- 查看账务账号明细Action，复用ToUpdateAccountAction -->
+		<action name="viewAccount" class="toUpdateAccountAction">
+			<result name="success">
+				/WEB-INF/account/viewAccount.jsp
+			</result>
+		</action>
+	</package>
+
+</struts>

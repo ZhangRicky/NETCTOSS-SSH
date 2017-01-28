@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 账单模块 -->
+	<package name="bill" namespace="/bill" extends="netctoss">
+		<action name="findBill" class="findBillAction" method="load">
+			<param name="condition.pageSize">1</param>
+			<result name="success">
+				/WEB-INF/bill/find_bill.jsp
+			</result>
+		</action>
+		<action name="findBillItem" class="findBillItemAction" method="load">
+			<result name="success">
+				/WEB-INF/bill/find_billitem.jsp
+			</result>
+		</action>
+		<action name="findServiceDetail" class="findServiceDetailAction" method="load">
+			<result name="success">
+				/WEB-INF/bill/find_servicedetail.jsp
+			</result>
+		</action>
+	</package>
+
+</struts>

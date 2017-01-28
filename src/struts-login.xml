@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<package name="login" namespace="/login" extends="netctoss">
+		<default-interceptor-ref name="privilegeInterceptorStack"/>
+		<action name="toIndex">
+			<result name="success">
+				/WEB-INF/main/index.jsp
+			</result>
+		</action>
+		<action name="nopower">
+			<result name="success">/WEB-INF/main/nopower.jsp</result>
+		</action>
+		<action name="toLogin">
+			<result name="success">/WEB-INF/main/login.jsp</result>
+		</action>
+		<action name="login" class="loginAction">
+			<result name="success" type="redirectAction">
+				toIndex
+			</result>
+			<result name="fail">/WEB-INF/main/login.jsp</result>
+		</action>
+		<!-- 验证码更换的C -->
+		<action name="validateCode" class="validateCodeAction">
+			<result name="success" type="stream">
+				<param name="inputName">codeStream</param>
+			</result>
+		</action>
+		<action name="logout" class="logoutAction">
+			<result name="success" type="json">
+				<param name="root">pass</param>
+			</result>
+		</action>
+		<action name="download" class="validateCodeAction">
+			<result name="success" type="stream">
+				<param name="inputName">codeStream</param>
+				<param name="contentType">text/plain</param>
+		        <param name="contentDisposition">
+		            attachment;filename="aaa.jpg"
+		        </param>
+		        <param name="bufferSize">2048</param>
+			</result>
+		</action>
+	</package>
+
+</struts>
